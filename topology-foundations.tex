@@ -127,6 +127,7 @@
 \renewcommand{\iff}{\Leftrightarrow}
 
 
+\usepackage{adforn}
 
 \begin{document}
 
@@ -292,7 +293,7 @@ Next consider a subset $A \subseteq X$. If $a,a' \in A$ and $x \in X \setminus A
     A map $\pCl{\,\cdot\,} \colon \powerset{X} \to \powerset{X}$ satisfying properties \subcref{enum:preclosure-extensive}, \subcref{enum:preclosure-nullary-unions} and \subcref{enum:preclosure-binary-unions} is called a \emph{\v{C}ech closure operator} or a \emph{preclosure operator} on $X$. It is easy to see that these properties imply the other properties by mimicking the proofs above (note that we used \subcref{enum:preclosure-increasing} in the proof of \subcref{enum:preclosure-binary-unions} above). In fact, such an operator can also be used to define a pretopological structure on a set, by declaring that $N$ is a neighbourhood of $x$ if $x \not\in \pCl{X \setminus N}$, in accordance with property \subcref{enum:preclosure-characterisation-of-nhoods} above.
 \end{remark}
 
-Let us try to understand the above results in terms of \enquote{closeness}:
+Let us try to understand [TODO ref prop] the above results in terms of \enquote{closeness}:
 %
 \begin{proofsec}
     \item[Part \subcref{enum:preclosure-increasing}]
@@ -437,19 +438,7 @@ We may use this correspondence to obtain properties of preinteriors analogous to
 
 \section{Convergence and continuity}
 
-Let $\calF$ be a system of subsets of a pretopological space $X$. We think of the sets in $\calF$ as describing the state of some system $\calS$ in $X$, where $F \in \calF$ means that $\calS$ eventually lies in $F$. If $F \subseteq F'$ then $\calS$ of course also eventually lies in $F'$. And for any two $F_1, F_2 \in \calF$, if $\calS$ eventually lies in $F_1$ and eventually lies in $F_2$, then it seems natural that $\calS$ will eventually lie in $F_1 \intersect F_2$. Finally, clearly the system cannot lie in the empty set, and on the other hand it trivially lies in $X$, so in total $\calF$ is a filter on $X$.
-
-If $\calS$ is somehow supposed to \enquote{converge} to a point $x \in X$, and if $N$ is a neighbourhood of $x$, then it also seems natural to require that $\calS$ eventually lies in $N$. For if $N$ being a neighbourhood of $x$ means that $x$ is somehow \enquote{completely enclosed} by $N$ \enquote{with room to spare}, and if $\calS$ is supposed to converge to $x$, then surely $\calS$ must eventually also be enclosed by $N$, i.e. we require that $N \in \calF$. This naturally leads to the following definition:
-
-\begin{definition}
-    Let $X$ be a pretopological space, and let $x \in X$. A filter $\calF$ on $X$ \emph{converges} to $x$ if $\nhoods{x} \subseteq \calF$.
-
-    Equivalently, a net $u$ in $X$ converges to $x$ if $u$ is eventually in $N$ for all $N \in \nhoods{x}$.
-\end{definition}
-%
-That is, convergence of filters and nets are entirely analogous to convergence in topological spaces.
-
-Next we turn to continuity. Intuitively, a function $f \colon X \to Y$ is continuous at a point $x \in X$ if points in $X$ that are close to $x$ are mapped to points in $Y$ that are close to $f(x)$. Usually this is formalised as follows:
+We begin by considering continuity. Intuitively, a function $f \colon X \to Y$ is continuous at a point $x \in X$ if points in $X$ that are close to $x$ are mapped to points in $Y$ that are close to $f(x)$. Usually this is formalised as follows:
 
 \begin{definition}[Continuity]
     Let $X$ and $Y$ be pretopological spaces, and let $x \in X$. A map $f \colon X \to Y$ is \emph{continuous at $x$} if, for all $A \subseteq X$, $x \in \pCl{A}$ implies that $f(x) \in \pCl{f(A)}$, i.e.
@@ -491,7 +480,7 @@ Next we wish to explicitly relate continuity to neighbourhoods, as is standardly
         \forall N \in \nhoods{f(x)} \exists M \in \nhoods{x} \colon f(M) \subseteq N.
     \end{equation*}
     %
-    In other words, $f$ is continuous at $x$ if $f\preim(N) \in \nhoods{x}$ for all $N \in \nhoods{f(x)}$. In particular, $f$ is continuous if and only if the preimage of any neighbourhood is a neighbourhood.
+    In other words, $f$ is continuous at $x$ if $f\preim(N) \in \nhoods{x}$ for all $N \in \nhoods{f(x)}$.
 \end{proposition}
 
 \begin{proof}
@@ -506,7 +495,7 @@ Next we wish to explicitly relate continuity to neighbourhoods, as is standardly
     %
     so since $N$ was arbitrary we have $f(x) \in \pCl{f(A)}$ as desired.
 
-    Conversely, assume that $f$ is continuous at $x$, and let $N \in \nhoods{f(x)}$. Assume towards a contradiction that $x \in \pCl{f\preim(Y \setminus N)}$. For since $f(f\preim(Y \setminus N)) \subseteq = Y \setminus N$ we would then have, by continuity,
+    Conversely, assume that $f$ is continuous at $x$, and let $N \in \nhoods{f(x)}$. Assume towards a contradiction that $x \in \pCl{f\preim(Y \setminus N)}$. Since $f(f\preim(Y \setminus N)) \subseteq Y \setminus N$ we then have, by continuity,
     %
     \begin{equation*}
         f(x)
@@ -515,11 +504,9 @@ Next we wish to explicitly relate continuity to neighbourhoods, as is standardly
     \end{equation*}
     %
     which is a contradiction since $f(x) \in \pInt{N}$. Hence $x$ has a neighbourhood $M$ disjoint from $f\preim(Y \setminus N)$, and this has the property that $f(M) \subseteq N$.
-
-    For the final claim, this is clear since every neighbourhood is a neighbourhood of some point.
 \end{proof}
 
-Let us try to understand this result: If $f \colon X \to Y$ is continuous at $x \in X$, then our initial definition is supposed to say that $f$ takes points in $X$ that are close to $x$ and map them to points in $Y$ that are close to $f(x)$. What the above says is that if (and only if) $f$ is continuous, then no matter which neighbourhood $N$ of $f(x)$ we consider, we can always find a neighbourhood $M$ of $x$ such that $f$ maps $M$ to $N$. Since it is in some sense \enquote{harder} to map a set into $N$ the smaller $N$ is -- i.e., we require $M$ to be smaller if $N$ is made smaller -- this seems to suggest another interpretation of neighbourhoods: Namely as formalising a sense of closeness. It is sometimes put as follows:
+Let us try to understand this result: If $f \colon X \to Y$ is continuous at $x \in X$, then our initial definition is supposed to say that $f$ takes points in $X$ that are close to $x$ and map them to points in $Y$ that are close to $f(x)$. What the above says is that if (and only if) $f$ is continuous, then no matter which neighbourhood $N$ of $f(x)$ we consider, we can always find a neighbourhood $M$ of $x$ such that $f$ maps $M$ to $N$. Since it is in some sense \enquote{harder} to map a set into $N$ the smaller $N$ is -- i.e., we might have to require $M$ to be smaller if $N$ is made smaller -- this seems to suggest another interpretation of neighbourhoods: Namely as formalising a sense of closeness. It is sometimes put as follows:
 
 Every neighbourhood $N$ of a point $x \in X$ defines a notion of closeness, let's call it \emph{$N$-closeness}. We say that a point $x' \in X$ is $N$-close to $x$ if $x' \in N$. We may then restate [TODO ref] as follows:
 %
@@ -527,113 +514,67 @@ Every neighbourhood $N$ of a point $x \in X$ defines a notion of closeness, let'
     A map $f \colon X \to Y$ is continuous at $x \in X$ if and only if it has the following property: For every $N \in \nhoods{f(x)}$ there is an $M \in \nhoods{x}$ such that if $x'$ is $M$-close to $x$, then $f(x')$ is $N$-close to $f(x)$.
 \end{displaytheorem}
 %
-This is then entirely analogous to the $\epsilon$-$\delta$-definition of continuity in metric spaces, where we might have said that $x'$ is $\delta$-close to $x$ if $\rho(x,x') < \delta$.
+This is then entirely analogous to the $\epsilon$-$\delta$-definition of continuity in metric spaces, where we might have said that $x'$ is $\delta$-close to $x$ if $\rho(x,x') < \delta$, though of course $N$-closeness is not generally symmetric.
 
 We might wonder whether the above gives us the right notion of closeness. What would happen, for instance, if we for $x'$ to be $N$-close to $x$ required that $x'$ be an \emph{inner point} of $N$? In a topological space we might think of this as more natural, especially if we are accustomed to thinking of neighbourhoods as by definition open. This would also not \emph{prima facie} contradict our earlier interpretation of neighbourhoods as \enquote{wholly containing} its inner points. I do not know of any conceptual problems with this approach, but while the two are practically equivalent in topological spaces, in a \emph{pretopological} space neighbourhoods of a point do not behave nicely with respect to points that are \enquote{close} to it, as we saw in [TODO ref rem].
 
---------------------------
+\newcommand\fleuronbreak{\fancybreak{\textcolor{linkcolor}{\adfhangingflatleafleft}}}
 
+\fleuronbreak
 
+We now turn to convergence. Let $\calF$ be a system of subsets of a pretopological space $X$. We think of the sets in $\calF$ as describing the state of some system $\calS$ in $X$, where $F \in \calF$ means that $\calS$ eventually lies in $F$. If $F \subseteq F'$ then $\calS$ of course also eventually lies in $F'$. And for any two $F_1, F_2 \in \calF$, if $\calS$ eventually lies in $F_1$ and eventually lies in $F_2$, then it seems natural that $\calS$ will eventually lie in $F_1 \intersect F_2$. Finally, clearly the system cannot lie in the empty set, and on the other hand it trivially lies in $X$, so in total $\calF$ is a filter on $X$.
 
+Let us consider what it can mean for $\calS$ to \enquote{converge} to a point $x \in X$. Can we use preclosures to define such a notion? This seems rather difficult, since $\calS$ is not a set so it does not have a preclosure. All we know is that $\calS$ somehow \enquote{eventually} lies in $F$ for all $F \in \calF$,\footnote{This kind of situation is often described as $\calS$ lying in all $F \in \calF$, but this wording makes it easy to conflate the current situation with $\calS$ lying in all $F$ \emph{simultaneously}.} but the exact nature of $\calS$ is unknown to us. Perhaps we can instead use the notion of closeness given to us by the neighbourhood filter $\nhoods{x}$ of $x$: If we trust this notion, then for $\calS$ to converge to $x$ we might require that, for all $N \in \nhoods{x}$, $\calS$ is eventually $N$-close to $x$. That is, $\calS$ should eventually lie in $N$. But since $\calF$ is precisely the collection of sets in which $\calS$ eventually lies, this just means that we should require that $\nhoods{x} \subseteq \calF$. This naturally leads to the following definition:
 
-Assume that for all points $x \in X$, a neighbourhood filter $\nhoods{x}$ has been specified. If $U \subseteq X$ has the property that all its points are in fact inner points, i.e. that $x \in U$ implies $x \inpoint U$, then $U$ is called \emph{open}. The collection of all open sets on $X$ is called its \emph{topology}. Denote the topology on $X$ by $\calT$. It is easy to show that $\calT$ has the following properties:
+\begin{definition}[Convergence]
+    Let $X$ be a pretopological space, and let $x \in X$. A filter $\calF$ on $X$ \emph{converges} to $x$ if $\nhoods{x} \subseteq \calF$.
+
+    Equivalently, a net $u$ in $X$ converges to $x$ if $u$ is eventually in $N$ for all $N \in \nhoods{x}$.
+\end{definition}
 %
-\begin{enumerate}
-    \item $\emptyset \in \calT$ and $X \in \calT$.
-    \item If $\calU \subseteq \calT$, then $\bigunion_{U \in \calU} U \in \calT$.
-    \item If $U,V \in \calT$, then $U \intersect V \in \calT$.
-\end{enumerate}
+That is, convergence of filters and nets are entirely analogous to convergence in topological spaces.
 
-\begin{proof}
-\begin{proofsec}
-    \item[Proof of (1)]
-    Since $\emptyset$ contains no points, it is trivially a neighbourhood of all its points. By postulate [TODO ref], $X$ is a neighbourhood of all $x \in X$.
+Before presenting the next result, recall that the \emph{pushforward} of a filter $\calF$ on a set $X$ by a set function $f \colon X \to Y$ is the filter $f(\calF)$ on $Y$ generated by the filter basis $\set{f(F)}{F \in \calF}$. Let us try to understand this construction conceptually: If $\calS$ is some system in $X$, then we might imagine mapping that to $Y$ by $f$ to obtain a system $f(\calS)$. For instance, if $\calS$ is a net $u$, then $f(\calS)$ is just the net $f \circ u$. If $\calS$ eventually lies in some set $F \subseteq X$, then $f(\calS)$ will simultaneously lie in $f(F)$. If $\calF$ is the filter of sets in which $\calS$ eventually lie, then $f(\calS)$ will thus eventually lie in all sets in $\set{f(F)}{F \in \calF}$, and hence in all the sets contained in the filter that this collection (which is indeed a filter basis) generates.
 
-    \item[Proof of (2)]
-    Since $V \subseteq \bigunion_{U \in \calU} U$ for all $V \in \calU$ and $V$ is a neighbourhood of all its points, postulate [TODO ref] implies that the union above is also a neighbourhood of all points in $V$. All points in the union is contained in some $V$, so the claim follows.
+Next suppose that $\calF$ converges to some $x \in X$. What about the limit behaviour of the pushforward $f(\calF)$? Does this converge to $f(x)$? For it to do so we require that $\nhoods{f(x)} \subseteq f(\calF)$, i.e. $f(\calF)$ should eventually lie in $N$ for all neighbourhoods $N$ of $f(x)$. When are we sure of this if we already know that $\calF$ eventually lies in $M$ for all neighbourhoods $M$ of $x$? If $f$ is continuous then this should certainly happen: For then if $\calS$ just gets close enough to $x$, then $f(\calS)$ can get as close as desired to $f(x)$. More precisely we have the following result:
 
-    \item[Proof of (3)]
-    This is a direct consequence of postulate [TODO ref].
-\end{proofsec}
-\end{proof}
-
-Now define the \emph{interior} of $A \subseteq X$ as the set $\interior{A}$ of all inner points of $A$, i.e.
-%
-\begin{equation*}
-    \interior{A}
-        = \set{x \in A}{x \inpoint A}.
-\end{equation*}
-%
-We claim that $\interior{A}$ is open. For if $x \in \interior{A}$ then $x \inpoint A$, so postulate [TODO ref] yields a $U \in \nhoods{x}$ with $U \subseteq A$ such that $y \inpoint A$ for all $y \in U$. Hence $U \subseteq \interior{A}$, so since $\nhoods{x}$ is upward closed, we have $x \inpoint \interior{A}$.
-
-This yields the following result:
-
-\begin{lemma}
-    Let $x \in X$ and $N \subseteq X$. Then $N \in \nhoods{x}$ if and only if there is a $U \in \calT$ such that $x \in U \subseteq N$.
-\end{lemma}
-
-\begin{proof}
-    Let $U = \interior{N}$. Since $x \inpoint N$ we have $x \in \interior{N}$ as desired.
-\end{proof}
-
-Consider distinct points $x,y \in X$. If there is a $U \in \nhoods{x}$ that does not contain $y$, then in some sense $x$ is \enquote{separated} from $y$, since it is \enquote{completely enclosed} in something that is disjoint from $y$. In this case we say that $x$ is \emph{separated from $y$}. Note however that even if $x$ is separated from $y$, $y$ might not be separated from $x$ (unless $X$ is $T_1$).
-
-Next consider a subset $A \subseteq X$. If $a,a' \in A$ and $x \in X \setminus A$, then it may happen that $x$ is separated from $a$ but not from $a'$. It might also happen that $x$ is separated from every individual $a \in A$, so there is some $U_a \in \nhoods{x}$ with $a \not\in U_a$, but no matter which $U_a$ we pick there are still points $a' \in A$ that lie in $U_a$. However, if there is a $U \in \nhoods{x}$ that is completely disjoint from $A$, then we say that $x$ is \emph{separated from $A$}.
-
-If $x$ is not separated from $A$, i.e. if every $U \in \nhoods{x}$ intersects (some point in) $A$, then $x$ is called an \emph{accumulation point} of $A$. The set of accumulation points of $A$ is called the \emph{derived set} of $A$ and is denoted $A'$. Note that $A$ and $A'$ are disjoint by definition. The \emph{closure} of $A$ is the set $\closure{A} = A \union A'$. Hence $\closure{A}$ is the set of points that cannot be separated from $A$, so these points are in some sense \enquote{close} to $A$.
-
-Clearly $A \subseteq B$ implies $\closure{A} \subseteq \closure{B}$, since if $x \in X$ is separated from $B$ then it is separated from $A$. That is, the map $A \mapsto \closure{A}$ is increasing. We furthermore have the following:
-
-\begin{proposition}
-    The operation $A \mapsto \closure{A}$ on $\powerset{X}$ has the following properties:
+\begin{proposition}[Continuity, filters and nets]
+    \label{thm:continuity-filter-net}
+    Let $f \colon X \to Y$ be a function between pretopological spaces, and let $x \in X$. Then $f$ is continuous at $x$ if and only if $\nhoods{f(x)} \subseteq f(\nhoods{x})$, i.e. if $f(\nhoods{x}) \to f(x)$. In particular, the following are equivalent:
     %
     \begin{enumprop}
-        \item $\closure{\emptyset} = \emptyset$.
-        \item $A \subseteq \closure{A}$.
-        \item $\closure{A \union B} = \closure{A} \union \closure{B}$.
-        \item $\closure{(\closure{A})} = \closure{A}$.
+        \item \label{enum:continuity-point} $f$ is continuous at $x$.
+        \item \label{enum:filter-convergence-point} For all filters $\calF$ on $X$, $\calF \to x$ implies that $f(\calF) \to f(x)$.
+        \item \label{enum:net-convergence-point} For all nets $u$ in $X$, $u \to x$ implies that $f(u) \to f(x)$.
     \end{enumprop}
 \end{proposition}
 
 \begin{proof}
+    If $f$ is continuous at $x$ and $N \in \nhoods{f(x)}$, then there exists an $M \in \nhoods{x}$ such that $f(M) \subseteq N$. But $f(M)$ lies in $f(\nhoods{x})$, and hence so does $N$.
+
+    Conversely, if $\nhoods{f(x)} \subseteq f(\nhoods{x})$ and $N \in \nhoods{f(x)}$, then by definition of $f(\nhoods{x})$ there exists an $M \in \nhoods{x}$ such that $f(M) \subseteq N$, so $f$ is continuous at $x$.
+%
 \begin{proofsec}
-    \item[Proof of (i)]
-    This is obvious since every point in $X$ is trivially separated from $\emptyset$.
+    \item[\subcref{enum:continuity-point} $\implies$ \subcref{enum:filter-convergence-point}]
+    Recall that $\calF \to x$ means that $\nhoods{x} \subseteq \calF$. Hence $\nhoods{f(x)} \subseteq f(\nhoods{x}) \subseteq f(\calF)$, so $f(\calF) \to f(x)$.
 
-    \item[Proof of (ii)]
-    This is obvious since $\closure{A} = A \union A'$ by definition.
+    \item[\subcref{enum:filter-convergence-point} $\implies$ \subcref{enum:continuity-point}]
+    This follows by setting $\calF = \nhoods{x}$.
 
-    \item[Proof of (iii)]
-    Since $A \mapsto \closure{A}$ is increasing, we have $\closure{A} \subseteq \closure{A \union B}$ and $\closure{B} \subseteq \closure{A \union B}$, so $\closure{A} \union \closure{B} \subseteq \closure{A \union B}$. Conversely let $x \not\in \closure{A} \union \closure{B}$, so $x$ is both separated from $A$ and $B$. Hence there exist $U_1,U_2 \in \nhoods{x}$ such that $U_1 \intersect A = U_2 \intersect B = \emptyset$. But then $U_1 \intersect U_2$ is a neighbourhood of $x$ separating $x$ from $A \union B$. Hence $x \not\in \closure{A \union B}$.
-
-    \item[Proof of (iv)]
-    Since $A \subseteq \closure{A}$ it suffices to show that $\closure{(\closure{A})} \subseteq \closure{A}$. Let $N$ be a neighbourhood of $x \in \closure{(\closure{A})}$, and let $U$ be open with $x \in U \subseteq N$. Then $U$ is also a neighbourhood of $x$, so $\closure{A} \intersect U \neq \emptyset$. Pick some $y \in \closure{A} \intersect U$. Then $U$ is also a neighbourhood of $y$, and since $y \in \closure{A}$ we must have $A \intersect U \neq \emptyset$. But then $A \intersect N \neq \emptyset$, so $x \in \closure{A}$.
+    \item[\subcref{enum:filter-convergence-point} $\Leftrightarrow$ \subcref{enum:net-convergence-point}]
+    This follows immediately from the correspondence between nets and filters.
 \end{proofsec}
 \end{proof}
-
-It is easy to understand the first three properties above in terms of \enquote{closeness}: Certainly nothing is close to the empty set, and every point in $A$ is close to $A$. Furthermore, something is close to $A \union B$ if and only if it is close to either $A$ or $B$. But the last property is difficult to understand intuitively: There are intuitive notions of \enquote{closeness} that satisfy the first three properties but not the fourth. For instance, we might say that two integers are close if their difference is at most $1$. That is, for $A \subseteq \ints$ we would define
+%
+The first part of the proposition implies that
 %
 \begin{equation*}
-    \closure{A}
-        = \bigunion_{a \in A} \{a-1, a, a+1\}.
+    \nhoods{x} \to x
+    \quad \implies \quad
+    f(\nhoods{x}) \to f(x)
 \end{equation*}
 %
-This clearly satisfies the first three properties, but it is not idempotent. (More properly we would say that an integer $n$ is close to the )
-
-A map $A \mapsto \closure{A}$ that satisfies the first three properties is called a \emph{\v{C}ech closure operator}, and if it also satisfies the fourth it is called a \emph{Kuratowski closure operator}. It is well-known that the latter can be used to define a topological structure on a set. However, we find idempotence to be too unintuitive to take this as a starting point of our discussion.
-
-
-\section{Closed sets}
-
-We say that a set $F \subseteq X$ is \emph{closed} if $\closure{F} = F$. In particular, the closure of any set is closed.
-
-
-\section{Continuity}
-
-
-
-
-\section{Results}
+whenever $f$ is continuous at $x$ (the antecedent is of course always true, so this implication is true just when the consequent is). The content of the implication \subcref{enum:continuity-point} $\implies$ \subcref{enum:filter-convergence-point} above is that we may replace $\nhoods{x}$ by any filter whatsoever.
 
 
 \nocite{*}
