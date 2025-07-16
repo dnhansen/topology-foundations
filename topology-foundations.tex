@@ -101,10 +101,6 @@
 \newcommand{\catStruc}[1]{\ncat{Str}_{#1}} % Category of structured sets
 \newcommand{\catStrucS}{\catStruc{\strucS}} % Category of \strucS-structured sets
 
-% TODO is this necessary?
-% % Section style -- add to section style .sty?
-% \setsubsecheadstyle{\normalfont\itshape}
-
 \newcommand{\inpoint}{\prec}
 \newcommand{\notinpoint}{\not\prec}
 \newcommand{\calN}{\mathcal{N}}
@@ -126,8 +122,11 @@
 % [TODO add to latex-sty?]
 \renewcommand{\iff}{\Leftrightarrow}
 
-
+% Break
 \usepackage{adforn}
+\newcommand\fleuronbreak{\fancybreak{\textcolor{linkcolor}{\adfhangingflatleafleft}}}
+
+
 
 \begin{document}
 
@@ -139,26 +138,26 @@
 
 Let $X$ be a set. Let $\inpoint$ be a relation from $X$ to $\powerset{X}$. If $x \inpoint U$, then we say that $x$ is an \emph{inner point} of $U$, and that $U$ is a \emph{neighbourhood} of $x$. One intuition for this relation is that $x \inpoint U$ just when $x$ is \enquote{completely contained} in $U$, or is \enquote{completely enclosed} in $U$, with \enquote{room to spare}. For this to be the case we obviously require that
 %
-\begin{enumerate}
+\begin{enumerate}[series=axioms]
     \item if $x \inpoint U$, then $x \in U$.
 \end{enumerate}
 %
 Clearly the empty set cannot be a neighbourhood of any point. On the other hand, since $X$ is the entire universe under consideration we surely want $X$ to be a neighbourhood of $x$. Hence we have the postulates
 %
-\begin{enumerate}[resume]
+\begin{enumerate}[resume*=axioms]
     \item $x \notinpoint \emptyset$, and
     \item $x \inpoint X$.
 \end{enumerate}
 %
 In particular, every point has at least one neighbourhood (namely $X$ itself). Furthermore, under the above interpretation, if $V \subseteq X$ is a set with $U \subseteq V$ then $V$ must also be a neighbourhood of $x$. Hence we have the postulate:
 %
-\begin{enumerate}[resume]
+\begin{enumerate}[resume*=axioms]
     \item If $x \inpoint U$ and $U \subseteq V$, then $x \inpoint V$.
 \end{enumerate}
 %
 Next assume that both $U$ and $V$ are neighbourhoods of $x$. That is, $x$ is \enquote{completely contained} in both $U$ and $V$, so it seems natural enough that $x$ should be \enquote{completely contained} in the intersection $U \intersect V$. That is,
 %
-\begin{enumerate}[resume]
+\begin{enumerate}[resume*=axioms]
     \item If $x \inpoint U$ and $x \inpoint V$, then $x \inpoint U \intersect V$.
 \end{enumerate}
 %
@@ -168,7 +167,7 @@ Next assume that both $U$ and $V$ are neighbourhoods of $x$. That is, $x$ is \en
 %     \item If $x \inpoint N$, then there is some $U \subseteq N$ such that $x \inpoint U$, and such that $y \inpoint N$ for all $y \in U$.
 % \end{enumerate}
 
-Now let $\nhoods{x}$ denote the collection of neighbourhoods of $x$. Then the above shows that $\nhoods{x}$ is a \emph{filter} on $X$, i.e. a proper, nonempty subset of $\powerset{X}$ that is upward closed and downward directed. Hence we call $\nhoods{x}$ the \emph{neighbourhood filter} of $x$. That is, a neighbourhood filter for a point $x \in X$ is a filter $\nhoods{x}$ on $X$ such that all sets in $\nhoods{x}$ contain $x$. A collection $(\nhoods{x})_{x \in X}$ of neighbourhood filters, one for each point in $X$, is then called a \emph{neighbourhood system} on $X$.
+Now let $\nhoods{x}$ denote the collection of neighbourhoods of $x$. Then the above discussion shows that $\nhoods{x}$ is a \emph{filter} on $X$, i.e. a proper, nonempty subset of $\powerset{X}$ that is upward closed and downward directed. Hence we call $\nhoods{x}$ the \emph{neighbourhood filter} of $x$. That is, a neighbourhood filter for a point $x \in X$ is a filter $\nhoods{x}$ on $X$ such that all sets in $\nhoods{x}$ contain $x$. A collection $(\nhoods{x})_{x \in X}$ of neighbourhood filters, one for each point in $X$, is then called a \emph{neighbourhood system} on $X$.
 
 We summarise the discussion in the following definition:
 
@@ -201,7 +200,7 @@ We summarise the discussion in the following definition:
 
 Let $X$ be a pretopological space and consider distinct points $x,y \in X$. If there is an $N \in \nhoods{x}$ that does not contain $y$, then in some sense $x$ is \enquote{separated} from $y$, since it is \enquote{completely enclosed} in something that is disjoint from $y$. In this case we say that $x$ is \emph{separated from $y$}. Note however that even if $x$ is separated from $y$, $y$ might not be separated from $x$.
 
-Next consider a subset $A \subseteq X$. If $a,a' \in A$ and $x \in X \setminus A$, then it may happen that $x$ is separated from $a$ but not from $a'$. It might also happen that $x$ is separated from every individual $a \in A$, so there is some $N_a \in \nhoods{x}$ with $a \not\in N_a$, but no matter which $N_a$ we pick there are still points $a' \in A$ that lie in $N_a$. However, if there is a $N \in \nhoods{x}$ that is completely disjoint from $A$, then we say that $x$ is \emph{separated from $A$}. On the other hand, a point that is \emph{not} separated from $A$ is in some sense \enquote{close} to $A$. Hence we have the following
+Next consider a subset $A \subseteq X$. If $a,a' \in A$ and $x \in X \setminus A$, then it may happen that $x$ is separated from $a$ but not from $a'$. It might also happen that $x$ is separated from every individual $a \in A$, so there is some $N_a \in \nhoods{x}$ with $a \not\in N_a$, but no matter which $N_a$ we pick there are still points $a' \in A$ that lie in $N_a$. However, if there is a $N \in \nhoods{x}$ that is completely disjoint from $A$, then we say that $x$ is \emph{separated from $A$}. On the other hand, a point that is \emph{not} separated from $A$ is in some sense \enquote{close} to $A$. Hence we have the following:
 
 \begin{definition}[Closure and preclosure]
     Let $X$ be a pretopological space, and let $A \subseteq X$.
@@ -223,6 +222,7 @@ Next consider a subset $A \subseteq X$. If $a,a' \in A$ and $x \in X \setminus A
 \end{definition}
 
 \begin{proposition}[Properties of preclosures]
+    \label{thm:preclosure-properties}
     Let $X$ be a pretopological space, and let $A,B \subseteq X$. The preclosure operator $\pCl{\,\cdot\,}$ has the following properties:
     %
     \begin{enumprop}
@@ -240,7 +240,7 @@ Next consider a subset $A \subseteq X$. If $a,a' \in A$ and $x \in X \setminus A
     \begin{enumprop}[resume]
         \item \label{enum:preclosure-characterisation-of-nhoods} A set $N \subseteq X$ is a neighbourhood of $x \in X$ if and only if $x \not\in \pCl{X \setminus N}$.
 
-        \item \label{enum:preclosure-inclusion-series} There is a potentially infinite series of inclusions
+        \item \label{enum:preclosure-inclusion-series} If $A \subseteq F$ and $F$ is closed, then $\pCl{A} \subseteq F$. In particular we have the inclusions
         %
         \begin{equation*}
             A
@@ -271,6 +271,8 @@ Next consider a subset $A \subseteq X$. If $a,a' \in A$ and $x \in X \setminus A
         \item[Proof of \subcref{enum:preclosure-characterisation-of-nhoods}]
         If $N$ is a neighbourhood of $x$, then $x$ has a neighbourhood disjoint from $X \setminus N$. Hence $x \not\in \pCl{X \setminus N}$. Conversely, if $x \not\in \pCl{X \setminus N}$ then $x$ has a neighbourhood $M$ disjoint from $X \setminus N$. But then we must have $M \subseteq N$, so $N$ is also a neighbourhood of $x$.
 
+        Alternatively, this will follow by duality from \cref{enum:preinterior-characterisation-of-nhoods}.
+
         \item[Proof of \subcref{enum:preclosure-inclusion-series}]
         Let $F \subseteq X$ be a closed set containing $A$. Then since $\pCl{F} = F$ we have $\pCl{A} \subseteq F$ by \subcref{enum:preclosure-increasing}. Repeatedly taking the preclosure on both sides we obtain
         %
@@ -290,10 +292,11 @@ Next consider a subset $A \subseteq X$. If $a,a' \in A$ and $x \in X \setminus A
 \end{proof}
 
 \begin{remark}
-    A map $\pCl{\,\cdot\,} \colon \powerset{X} \to \powerset{X}$ satisfying properties \subcref{enum:preclosure-extensive}, \subcref{enum:preclosure-nullary-unions} and \subcref{enum:preclosure-binary-unions} is called a \emph{\v{C}ech closure operator} or a \emph{preclosure operator} on $X$. It is easy to see that these properties imply the other properties by mimicking the proofs above (note that we used \subcref{enum:preclosure-increasing} in the proof of \subcref{enum:preclosure-binary-unions} above). In fact, such an operator can also be used to define a pretopological structure on a set, by declaring that $N$ is a neighbourhood of $x$ if $x \not\in \pCl{X \setminus N}$, in accordance with property \subcref{enum:preclosure-characterisation-of-nhoods} above.
+    \label{rem:Cech-closure-operator}
+    A map $\pCl{\,\cdot\,} \colon \powerset{X} \to \powerset{X}$ satisfying properties \subcref{enum:preclosure-extensive}, \subcref{enum:preclosure-nullary-unions} and \subcref{enum:preclosure-binary-unions} is called a \emph{\v{C}ech closure operator} or a \emph{preclosure operator} on $X$. It is easy to see that these properties imply the other properties by mimicking the proofs above (note that we used \subcref{enum:preclosure-increasing} in the proof of \subcref{enum:preclosure-binary-unions}). In fact, such an operator can also be used to define a pretopological structure on a set, by declaring that $N$ is a neighbourhood of $x$ if $x \not\in \pCl{X \setminus N}$, in accordance with property \subcref{enum:preclosure-characterisation-of-nhoods} above.
 \end{remark}
 
-Let us try to understand [TODO ref prop] the above results in terms of \enquote{closeness}:
+Let us try to understand \cref{thm:preclosure-properties} in terms of \enquote{closeness}:
 %
 \begin{proofsec}
     \item[Part \subcref{enum:preclosure-increasing}]
@@ -324,16 +327,9 @@ Let us try to understand [TODO ref prop] the above results in terms of \enquote{
     which is clearly not idempotent, though it is a \v{C}ech closure operator.
 
     If the sequence of inclusions in \subcref{enum:preclosure-inclusion-series} terminates, then we have found all the points that are close to $A$, and the resulting set is closed. A set is thus closed if it contains all points that are close to it. But for the preclosure on $\ints$ above, the only closed sets are $\emptyset$ and $\ints$ itself.
-
-    % In [TODO ref] we will return to this example. We note finally that a way to assign a neighbourhood system to $\ints$ that gives rise to the above preclosure operation is to let
-    % %
-    % \begin{equation*}
-    %     \nhoods{x}
-    %         = \set{N \subseteq \ints}{x-1,x,x+1 \in N}
-    % \end{equation*}
-    % %
-    % for all $x \in \ints$.
 \end{proofsec}
+
+\fleuronbreak
 
 A second important operation is the following:
 
@@ -354,9 +350,12 @@ A second important operation is the following:
         
         \item The \emph{interior} $\interior{A}$ of $A$ is the union of all open sets contained in $A$.
     \end{enumdef}
+    %
+    The collection of all open subsets of $X$ is called the \emph{topology} on $X$.
 \end{definition}
 
 \begin{remark}
+    \label{rem:interior-empty}
     In a topological space, if $N$ is a neighbourhood of a point $x$, then there exists an open set $U$ such that $x \in U \subseteq N$. We claim that this is not necessarily the case in a pretopological space: Indeed, we show that the interior of a neighbourhood can be empty.
 
     Consider the pretopological space whose underlying set is $\reals$, and where $\nhoods{0} = \set{N \subseteq \reals}{(-1,1) \subseteq N}$ and $\nhoods{x} = \{\reals\}$ for $x \neq 0$. Then $(-1,1)$ is a neighbourhood of $0$, but if $A \subseteq (-1,1)$ is to be open, then we must have $\pInt{A} = A$, and this is only possible when $A = \emptyset$.
@@ -364,10 +363,40 @@ A second important operation is the following:
     The trouble is clearly that $(-1,1)$ is a neighbourhood of $0$ but not of any of the points that are close to $0$, which it would be in a topological space.
 \end{remark}
 
+\begin{proposition}
+    \label{thm:open-sets-constitute-topology}
+    Let $(X,\inpoint)$ be a pretopological space, and let $\calT$ be its topology.
+    %
+    \begin{enumprop}
+        \item \label{enum:topology-emptyset+X} The empty set and $X$ belong to $\calT$.
+        \item \label{enum:topology-unions} $\calT$ is closed under arbitrary unions.
+        \item \label{enum:topology-intersections} $\calT$ is closed under finite intersections.
+    \end{enumprop}
+    %
+    That is, $(X,\calT)$ is a topological space.
+\end{proposition}
+
+\newcommand{\bbU}{\mathbb{U}}
+
+\begin{proof}
+\begin{proofsec}
+    \item[Proof of \subcref{enum:topology-emptyset+X}]
+    This is obvious.
+    
+    \item[Proof of \subcref{enum:topology-unions}]
+    Let $\calU$ be a collection of sets from $\calT$, and let $\bbU = \bigunion_{U \in \calU} U$. If $x \in \bbU$, then there is a $U \in \calU$ such that $x \in U$. But since $U$ is open we have $x \inpoint U \subseteq \bbU$, so $x \inpoint \bbU$.
+
+    \item[Proof of \subcref{enum:topology-intersections}]
+    By \subcref{enum:topology-emptyset+X} it suffices to consider binary intersections, so let $U,V \in \calT$. If $x \in U \intersect V$, then $x \inpoint U$ and $x \inpoint V$. But then it follows that $x \inpoint U \intersect V$ since the relation $\inpoint$ is downward directed.
+\end{proofsec}
+\end{proof}
+
+\fleuronbreak
 
 Closures and interiors are dual to each other:
 %
-\begin{proposition}
+\begin{proposition}[Closure--interior duality]
+    \label{thm:closure-interior-duality}
     Let $(X,\inpoint)$ be a pretopological space, and let $A \subseteq X$. Then
     %
     \begin{equation*}
@@ -431,9 +460,53 @@ Closures and interiors are dual to each other:
     as claimed. The second part of the last claim follows by taking complements.
 \end{proof}
 
-We may use this correspondence to obtain properties of preinteriors analogous to those of preclosures in [TODO ref], but we will not use these in the sequel.
+\begin{corollary}
+    \label{thm:interior-open-closure-closed}
+    If $A$ is a subset of a pretopological space, then $\interior{A}$ is open and $\closure{A}$ is closed.
+\end{corollary}
 
+\begin{proof}
+    The first claim is obvious from \cref{thm:open-sets-constitute-topology}, and the second follows by duality.
+\end{proof}
 
+We may use this correspondence to obtain properties of preinteriors analogous to those of preclosures in \cref{thm:preclosure-properties}:
+
+\begin{proposition}[Properties of preinteriors]
+    \label{thm:preinterior-properties}
+    Let $X$ be a pretopological space, and let $A,B \subseteq X$. The preinterior operator $\pInt{\,\cdot\,}$ has the following properties:
+    %
+    \begin{enumprop}
+        \item \label{enum:preinterior-increasing} Increasing: $A \subseteq B$ implies $\pInt{A} \subseteq \pInt{B}$.
+        
+        \item \label{enum:preinterior-antiextensive} Anti-extensive: $\pInt{A} \subseteq A$.
+        
+        \item \label{enum:preinterior-nullary-intersections} Preserves nullary intersections: $\pInt{X} = X$
+        
+        \item \label{enum:preinterior-binary-intersections} Preserves binary unions: $\pInt{A \intersect B} = \pInt{A} \intersect \pInt{B}$.
+    \end{enumprop}
+    %
+    We also have the following:
+    %
+    \begin{enumprop}[resume]
+        \item \label{enum:preinterior-characterisation-of-nhoods} A set $N \subseteq X$ is a neighbourhood of $x \in X$ if and only if $x \in \pInt{N}$.
+
+        \item \label{enum:preinterior-inclusion-series} If $U \subseteq A$ and $U$ is open, then $U \subseteq \pInt{A}$. In particular we have the inclusions
+        %
+        \begin{equation*}
+            \interior{A}
+                \subseteq \cdots
+                \subseteq \pInt{\pInt{A}}
+                \subseteq \pInt{A}
+                \subseteq A
+        \end{equation*}
+        
+        \item \label{enum:preinterior-equals-itnerior} If $A$ is open, then $\pInt{A} = \interior{A}$.
+    \end{enumprop}
+\end{proposition}
+
+\begin{proof}
+    Every point follows easily from \cref{thm:preclosure-properties} by duality. However, note that \subcref{enum:preinterior-characterisation-of-nhoods} is simply a restatement of the definition of preinterior.
+\end{proof}
 
 
 \section{Convergence and continuity}
@@ -441,6 +514,7 @@ We may use this correspondence to obtain properties of preinteriors analogous to
 We begin by considering continuity. Intuitively, a function $f \colon X \to Y$ is continuous at a point $x \in X$ if points in $X$ that are close to $x$ are mapped to points in $Y$ that are close to $f(x)$. Usually this is formalised as follows:
 
 \begin{definition}[Continuity]
+    \label{def:continuity}
     Let $X$ and $Y$ be pretopological spaces, and let $x \in X$. A map $f \colon X \to Y$ is \emph{continuous at $x$} if, for all $A \subseteq X$, $x \in \pCl{A}$ implies that $f(x) \in \pCl{f(A)}$, i.e.
     %
     \begin{equation*}
@@ -471,9 +545,12 @@ As in topological spaces we can characterise global continuity more simply:
     If $f$ is continuous and $A \subseteq X$, then for all $x \in \pCl{A}$ we have $f(x) \in \pCl{f(A)}$, which just says that $f(\pCl{A}) \subseteq \pCl{f(A)}$. Conversely, if $f$ satisfies the above condition and $x \in \pCl{A}$, then $f(x) \in f(\pCl{A}) \subseteq \pCl{f(A)}$, so $f$ is continuous at $x$.
 \end{proof}
 
-Next we wish to explicitly relate continuity to neighbourhoods, as is standardly done in topology. In a topological space it is well-known that continuity as defined above is equivalent to preimages of open sets being open. In pretopological spaces we have something similar, though we must focus on neighbourhoods:
+\fleuronbreak
+
+Next we wish to explicitly relate continuity to neighbourhoods, as is standardly done in topology. In a topological space it is well-known that continuity as defined in \cref{def:continuity} is equivalent to preimages of open sets being open. In pretopological spaces we have something similar, though we must focus on neighbourhoods:
 
 \begin{proposition}
+    \label{thm:continuity-by-neighbourhoods}
     Let $f \colon X \to Y$ be a map between pretopological spaces, and let $x \in X$. Then $f$ is continuous at $x$ if and only if it has the following property: For all $N \in \nhoods{f(x)}$ there is an $M \in \nhoods{x}$ such that $f(M) \subseteq N$, i.e.
     %
     \begin{equation*}
@@ -482,6 +559,7 @@ Next we wish to explicitly relate continuity to neighbourhoods, as is standardly
     %
     In other words, $f$ is continuous at $x$ if $f\preim(N) \in \nhoods{x}$ for all $N \in \nhoods{f(x)}$.
 \end{proposition}
+% [TODO: global continuity doesn't work with neighbourhoods -- find counterexample?]
 
 \begin{proof}
     First assume that $f$ has the above property. Let $A \subseteq X$ be such that $x \in \pCl{A}$, and let $N \in \nhoods{f(x)}$. Then there exists an $M \in \nhoods{x}$ such that $f(M) \subseteq N$. Since $M$ is a neighbourhood of $x$ we have $A \intersect M \neq \emptyset$. It follows that
@@ -506,9 +584,9 @@ Next we wish to explicitly relate continuity to neighbourhoods, as is standardly
     which is a contradiction since $f(x) \in \pInt{N}$. Hence $x$ has a neighbourhood $M$ disjoint from $f\preim(Y \setminus N)$, and this has the property that $f(M) \subseteq N$.
 \end{proof}
 
-Let us try to understand this result: If $f \colon X \to Y$ is continuous at $x \in X$, then our initial definition is supposed to say that $f$ takes points in $X$ that are close to $x$ and map them to points in $Y$ that are close to $f(x)$. What the above says is that if (and only if) $f$ is continuous, then no matter which neighbourhood $N$ of $f(x)$ we consider, we can always find a neighbourhood $M$ of $x$ such that $f$ maps $M$ to $N$. Since it is in some sense \enquote{harder} to map a set into $N$ the smaller $N$ is -- i.e., we might have to require $M$ to be smaller if $N$ is made smaller -- this seems to suggest another interpretation of neighbourhoods: Namely as formalising a sense of closeness. It is sometimes put as follows:
+Let us try to understand this result: If $f \colon X \to Y$ is continuous at $x \in X$, then \cref{def:continuity} is supposed to say that $f$ takes points in $X$ that are close to $x$ and map them to points in $Y$ that are close to $f(x)$. What \cref{thm:continuity-by-neighbourhoods} says is that if (and only if) $f$ is continuous, then no matter which neighbourhood $N$ of $f(x)$ we consider, we can always find a neighbourhood $M$ of $x$ such that $f$ maps $M$ to $N$. Since it is in some sense \enquote{harder} to map a set into $N$ the smaller $N$ is -- i.e., we might have make $M$ smaller if $N$ is made smaller -- this seems to suggest another interpretation of neighbourhoods: Namely as formalising a sense of closeness. It is sometimes put as follows:
 
-Every neighbourhood $N$ of a point $x \in X$ defines a notion of closeness, let's call it \emph{$N$-closeness}. We say that a point $x' \in X$ is $N$-close to $x$ if $x' \in N$. We may then restate [TODO ref] as follows:
+Every neighbourhood $N$ of a point $x \in X$ defines a notion of closeness, let's call it \emph{$N$-closeness}. We say that a point $x' \in X$ is $N$-close to $x$ if $x' \in N$. We may then restate \cref{thm:continuity-by-neighbourhoods} as follows:
 %
 \begin{displaytheorem}
     A map $f \colon X \to Y$ is continuous at $x \in X$ if and only if it has the following property: For every $N \in \nhoods{f(x)}$ there is an $M \in \nhoods{x}$ such that if $x'$ is $M$-close to $x$, then $f(x')$ is $N$-close to $f(x)$.
@@ -516,9 +594,7 @@ Every neighbourhood $N$ of a point $x \in X$ defines a notion of closeness, let'
 %
 This is then entirely analogous to the $\epsilon$-$\delta$-definition of continuity in metric spaces, where we might have said that $x'$ is $\delta$-close to $x$ if $\rho(x,x') < \delta$, though of course $N$-closeness is not generally symmetric.
 
-We might wonder whether the above gives us the right notion of closeness. What would happen, for instance, if we for $x'$ to be $N$-close to $x$ required that $x'$ be an \emph{inner point} of $N$? In a topological space we might think of this as more natural, especially if we are accustomed to thinking of neighbourhoods as by definition open. This would also not \emph{prima facie} contradict our earlier interpretation of neighbourhoods as \enquote{wholly containing} its inner points. I do not know of any conceptual problems with this approach, but while the two are practically equivalent in topological spaces, in a \emph{pretopological} space neighbourhoods of a point do not behave nicely with respect to points that are \enquote{close} to it, as we saw in [TODO ref rem].
-
-\newcommand\fleuronbreak{\fancybreak{\textcolor{linkcolor}{\adfhangingflatleafleft}}}
+We might wonder whether the above gives us the right notion of closeness. What would happen, for instance, if we for $x'$ to be $N$-close to $x$ required that $x'$ be an \emph{inner point} of $N$? In a topological space we might think of this as more natural, especially if we are accustomed to thinking of neighbourhoods as by definition open. This would also not \emph{prima facie} contradict our earlier interpretation of neighbourhoods as \enquote{wholly containing} its inner points. I do not know of any conceptual problems with this approach, but while the two are practically equivalent in topological spaces, in a \emph{pretopological} space neighbourhoods of a point do not behave nicely with respect to points that are \enquote{close} to it, as we saw in \cref{rem:interior-empty}.
 
 \fleuronbreak
 
@@ -527,14 +603,18 @@ We now turn to convergence. Let $\calF$ be a system of subsets of a pretopologic
 Let us consider what it can mean for $\calS$ to \enquote{converge} to a point $x \in X$. Can we use preclosures to define such a notion? This seems rather difficult, since $\calS$ is not a set so it does not have a preclosure. All we know is that $\calS$ somehow \enquote{eventually} lies in $F$ for all $F \in \calF$,\footnote{This kind of situation is often described as $\calS$ lying in all $F \in \calF$, but this wording makes it easy to conflate the current situation with $\calS$ lying in all $F$ \emph{simultaneously}.} but the exact nature of $\calS$ is unknown to us. Perhaps we can instead use the notion of closeness given to us by the neighbourhood filter $\nhoods{x}$ of $x$: If we trust this notion, then for $\calS$ to converge to $x$ we might require that, for all $N \in \nhoods{x}$, $\calS$ is eventually $N$-close to $x$. That is, $\calS$ should eventually lie in $N$. But since $\calF$ is precisely the collection of sets in which $\calS$ eventually lies, this just means that we should require that $\nhoods{x} \subseteq \calF$. This naturally leads to the following definition:
 
 \begin{definition}[Convergence]
-    Let $X$ be a pretopological space, and let $x \in X$. A filter $\calF$ on $X$ \emph{converges} to $x$ if $\nhoods{x} \subseteq \calF$.
+    Let $X$ be a pretopological space, and let $x \in X$. A filter $\calF$ on $X$ \emph{converges} to $x$ if $\nhoods{x} \subseteq \calF$. In this case we write $\calF \to x$.
 
-    Equivalently, a net $u$ in $X$ converges to $x$ if $u$ is eventually in $N$ for all $N \in \nhoods{x}$.
+    Equivalently, a net $u$ in $X$ converges to $x$ if $u$ is eventually in $N$ for all $N \in \nhoods{x}$. We similarly write $u \to x$.
 \end{definition}
 %
-That is, convergence of filters and nets are entirely analogous to convergence in topological spaces.
+That is, convergence of filters and nets is entirely analogous to convergence in topological spaces.
 
-Before presenting the next result, recall that the \emph{pushforward} of a filter $\calF$ on a set $X$ by a set function $f \colon X \to Y$ is the filter $f(\calF)$ on $Y$ generated by the filter basis $\set{f(F)}{F \in \calF}$. Let us try to understand this construction conceptually: If $\calS$ is some system in $X$, then we might imagine mapping that to $Y$ by $f$ to obtain a system $f(\calS)$. For instance, if $\calS$ is a net $u$, then $f(\calS)$ is just the net $f \circ u$. If $\calS$ eventually lies in some set $F \subseteq X$, then $f(\calS)$ will simultaneously lie in $f(F)$. If $\calF$ is the filter of sets in which $\calS$ eventually lie, then $f(\calS)$ will thus eventually lie in all sets in $\set{f(F)}{F \in \calF}$, and hence in all the sets contained in the filter that this collection (which is indeed a filter basis) generates.
+Furthermore, as in topological spaces for a filter $\calF$ to converge to $x$, it suffices that $\calB \subseteq \calF$ for a filter basis $\calB$ for $\nhoods{x}$. However, contrary to in topological spaces the collection of open sets containing $x$ does not necessarily constitute a filter basis for $\nhoods{x}$: Indeed, we saw in \cref{rem:interior-empty} that a neighbourhood need not contain any open sets at all. In general pretopological spaces we thus cannot use open sets as a substitute for neighbourhoods in our theory of convergence. Below we will recover the well-known connection between convergence and continuity, showing that open sets also do not suffice to characterise continuity.
+
+\fleuronbreak
+
+We want to understand the relationship between convergence and continuity. Recall that the \emph{pushforward} of a filter $\calF$ on a set $X$ by a set function $f \colon X \to Y$ is the filter $f(\calF)$ on $Y$ generated by the filter basis $\set{f(F)}{F \in \calF}$. Let us try to understand this construction conceptually: If $\calS$ is some system in $X$, then we might imagine mapping that to $Y$ by $f$ to obtain a system $f(\calS)$. For instance, if $\calS$ is a net $u$, then $f(\calS)$ is just the net $f \circ u$. If $\calS$ eventually lies in some set $F \subseteq X$, then $f(\calS)$ will simultaneously lie in $f(F)$. If $\calF$ is the filter of sets in which $\calS$ eventually lie, then $f(\calS)$ will thus eventually lie in all sets in $\set{f(F)}{F \in \calF}$, and hence in all the sets contained in the filter that this collection (which is indeed a filter basis) generates.
 
 Next suppose that $\calF$ converges to some $x \in X$. What about the limit behaviour of the pushforward $f(\calF)$? Does this converge to $f(x)$? For it to do so we require that $\nhoods{f(x)} \subseteq f(\calF)$, i.e. $f(\calF)$ should eventually lie in $N$ for all neighbourhoods $N$ of $f(x)$. When are we sure of this if we already know that $\calF$ eventually lies in $M$ for all neighbourhoods $M$ of $x$? If $f$ is continuous then this should certainly happen: For then if $\calS$ just gets close enough to $x$, then $f(\calS)$ can get as close as desired to $f(x)$. More precisely we have the following result:
 
@@ -565,8 +645,8 @@ Next suppose that $\calF$ converges to some $x \in X$. What about the limit beha
     This follows immediately from the correspondence between nets and filters.
 \end{proofsec}
 \end{proof}
-%
-The first part of the proposition implies that
+
+Before we said that if $f$ is continuous at $x$, then $\calF \to x$ implies that $f(\calF) \to f(x)$. \Cref{thm:continuity-filter-net} gives a converse: namely that if this implication holds for all filters $\calF$, then $f$ is continuous at $x$. In fact, the proposition shows that it suffices that the implication holds for the filter $\nhoods{x}$. Since $\nhoods{x}$ always converges to $x$, the relevant implication
 %
 \begin{equation*}
     \nhoods{x} \to x
@@ -574,7 +654,76 @@ The first part of the proposition implies that
     f(\nhoods{x}) \to f(x)
 \end{equation*}
 %
-whenever $f$ is continuous at $x$ (the antecedent is of course always true, so this implication is true just when the consequent is). The content of the implication \subcref{enum:continuity-point} $\implies$ \subcref{enum:filter-convergence-point} above is that we may replace $\nhoods{x}$ by any filter whatsoever.
+holds just when $f(\nhoods{x}) \to f(x)$. How should be understand this convergence? Indeed, what does it even mean that $\nhoods{x} \to x$? What is the system in $X$ whose convergence is described by $\nhoods{x}$? % [TODO]
+
+
+\chapter{Topological spaces}
+
+Our discussion of pretopological spaces began with an analysis of \emph{inner points} and \emph{neighbourhoods}. We said that $x$ is an inner point of $N$ when $x$ is \enquote{completely contained} in $N$. The axioms, however, did not place any restrictions on the relationship between neighbourhoods of different points. However, it seems natural enough that there should be at least some such restrictions.
+
+For example, we might find it problematic that we do not have a good notion of closeness between points. We have only said what it means for a point to be close to a set, not for two points to be close to each other. We might try to say that $x$ is close to $y$ if $x \in \pCl{\{y\}}$. But then it seems quite natural that $x$ should be close to $y$ iff $y$ is close to $x$. Sadly, we are not guaranteed that $y \in \pCl{\{x\}}$ whenever $x \in \pCl{\{y\}}$. This is one restriction we might make on our spaces.\footnote{In the usual topological context, this leads to the theory of \emph{$R_0$-spaces}. A topological space $X$ is an $R_0$-space if any two topologically distinguishable points in $X$ are separated. That is, if $x,y \in X$ and e.g. $x$ has a neighbourhood disjoint from $y$, then $y$ has a neighbourhood disjoint from $x$. A space is $T_1$ if and only if it is both $T_0$ and $R_0$.}
+
+Another is to consider that if $x$ is an inner point of $N$, then it seems natural that points that are \enquote{close enough to $x$} should also be inner points of $N$. Otherwise, why would $x$ be an \emph{inner} point? We considered above the notion of $N$-closeness: A point $y$ is $N$-close to $x$ if $y \in N$. Perhaps we should require that, if $x$ is an inner point of $N$, then there should be some neighbourhood $U \subseteq N$ of $x$ such that points that are $U$-close to $x$ are also inner points of $N$. Hence we have the postulate:
+%
+\begin{enumerate}[resume*=axioms]
+    \item For all $x \in X$ and $N \in \nhoods{x}$, there is a $U \subseteq N$ with $x \inpoint U$ such that $y \inpoint N$ for all $y \in U$.
+\end{enumerate}
+%
+Accepting this postulate requires accepting its consequences:
+
+\newcommand{\opens}[1]{\calU_{#1}}
+
+\begin{proposition}
+    \label{thm:topology-equivalent-properties}
+    Let $X$ be a pretopological space. Then the following are equivalent:
+    %
+    \begin{enumprop}
+        \item \label{enum:topology-filterbasis-intuition} For all $x \in X$ and $N \in \nhoods{x}$, there is a $U \subseteq N$ with $x \inpoint U$ such that $y \inpoint N$ for all $y \in U$.
+        
+        \item \label{enum:topology-filterbasis} For all $x \in X$, $\opens{x}$ is a filter basis for $\nhoods{x}$.
+        
+        \item \label{enum:topology-preclosure-always-closed} $\pCl{A}$ is closed for all $A \subseteq X$; equivalently $\pInt{A}$ is open for all $A \subseteq X$.
+        
+        \item \label{enum:topology-preclosure-closure-equal} $\pCl{A} = \closure{A}$ for all $A \subseteq X$; equivalently $\pInt{A} = \interior{A}$ for all $A \subseteq X$.
+        
+        \item \label{enum:topology-idempotence} $\pCl{\,\cdot\,}$ is idempotent; equivalently $\pInt{\,\cdot\,}$ is idempotent.
+    \end{enumprop}
+\end{proposition}
+
+\begin{proof}
+The equivalences in parts \subcref{enum:topology-preclosure-always-closed}, \subcref{enum:topology-preclosure-closure-equal} and \subcref{enum:topology-idempotence} follow by duality (cf. \cref{thm:closure-interior-duality}).
+%
+\begin{proofsec}
+    \item[\subcref{enum:topology-filterbasis-intuition} $\implies$ \subcref{enum:topology-filterbasis}]
+    Let $x \in X$ and $N \in \nhoods{x}$, and let $U = \pInt{N}$. We claim that $U$ is open. For each $y \in U$ we have $y \inpoint N$, so there is a $U_y \subseteq N$ such that $y \inpoint U_y$, and such that $z \inpoint N$ for all $z \in U_y$. But then $U_y \subseteq U$, so $y \inpoint U$. Hence $U$ is open as desired.
+    
+    \item[\subcref{enum:topology-filterbasis} $\implies$ \subcref{enum:topology-filterbasis-intuition}]
+    Let $x \in X$ and $N \in \nhoods{x}$, and let $U \subseteq N$ be an open set containing $x$. Since $U$ is open, all its points are inner points, hence inner points of $N$.
+
+    \item[\subcref{enum:topology-filterbasis} $\implies$ \subcref{enum:topology-preclosure-always-closed}]
+    Let $A \subseteq X$. We show that $\pInt{A}$ is open. For $x \in \pInt{A}$ we have $x \inpoint A$, so there is an open $U_x \subseteq A$ with $x \in U_x \subseteq A$. But then $U_x \subseteq \pInt{A}$ by \cref{enum:preinterior-inclusion-series}, so $\pInt{A} = \bigunion_{x \in \pInt{A}} U_x$ is a union of open sets, hence open by \cref{thm:open-sets-constitute-topology}.
+
+    \item[\subcref{enum:topology-preclosure-always-closed} $\implies$ \subcref{enum:topology-filterbasis}]
+    Let $x \in X$ and $N \in \nhoods{x}$ and notice that $x \in \pInt{N} \subseteq N$ with $\pInt{N}$ open.
+
+    \item[\subcref{enum:topology-preclosure-always-closed} $\implies$ \subcref{enum:topology-preclosure-closure-equal}]
+    Let $A \subseteq X$. Since $\pInt{A}$ is open we have $\pInt{A} \subseteq \interior{A}$ by definition of the interior. The opposite inclusion always holds, so we have equality.
+
+    \item[\subcref{enum:topology-preclosure-closure-equal} $\implies$ \subcref{enum:topology-idempotence}]
+    Let $A \subseteq X$. Since $\interior{A}$ is open by \cref{thm:interior-open-closure-closed}, we have $\interior{A} = \pInt{\interior{A}}$. But then it follows that $\pInt{A} = \pInt{\pInt{A}}$.
+
+    \item[\subcref{enum:topology-idempotence} $\implies$ \subcref{enum:topology-preclosure-always-closed}]
+    Let $A \subseteq X$ Since the preinterior operator is idempotent, we have $\pInt{\pInt{A}} = \pInt{A}$. But then $\pInt{A}$ is open by definition.
+\end{proofsec}
+\end{proof}
+
+Notice that \cref{enum:topology-filterbasis} remedies the issue in \cref{rem:interior-empty} by ensuring that every neighbourhood of a point contains a nonempty open set. This is essentially a restatement of \cref{enum:topology-filterbasis-intuition}, relating it to the filter structure that the $\inpoint$-relation induces on $X$.
+
+\fleuronbreak
+
+Most notably, postulate [TODO ref] is equivalent to the idempotence of $\pCl{\,\cdot\,}$. Recall from \cref{rem:Cech-closure-operator} that $\pCl{\,\cdot\,}$ is always a \v{C}ech closure operator. If it is also idempotent, then it is called a \emph{Kuratowski closure operator}. The content of \cref{thm:topology-equivalent-properties} is first of all that if $\pCl{\,\cdot\,}$ is a Kuratowski closure operator, then $N \subseteq X$ is a neighbourhood of a point $x \in X$ just when $x$ has an open neighbourhood contained in $N$. Hence the neighbourhoods of $x$ are precisely the neighbourhoods of $x$ in the topological space $(X,\calT)$, where $\calT$ is the topology on $X$. Therefore, just as a set $X$ can be equipped with a pretopological structure by defining a \v{C}ech closure operator on it, $X$ can be equipped with a \emph{topological} structure by defining a Kuratowski closure operator on it. What's more, that structure will be compatible with Kuratowski closure operator in the sense of \cref{thm:topology-equivalent-properties}.
+
+Furthermore, we can give a conceptual interpretation of idempotence of $\pCl{\,\cdot\,}$ and try to understand exactly what we are assuming when accepting postulate [TODO ref]: Recall that we said that a point $x$ is \enquote{close} to a set $A$ if $x \in \pCl{A}$. Then \cref{enum:topology-idempotence} says that $x$ is close to $A$ if and only if it is close to $\pCl{A}$. In other words, taking the (pre)closure of a set in effect creates a sort of boundary, such that all points outside the (pre)closure are separated from it by this boundary.
 
 
 \nocite{*}
